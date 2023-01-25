@@ -418,14 +418,10 @@ LorenzosDrums2 {
 		namesMicSnare.do({ arg name,i;
 			var buffer1=bufSnare[i][buf1][bufSnare[i][buf1].size.rand];
 			var buffer2=bufSnare[i][buf2][bufSnare[i][buf2].size.rand];
-			if (buffer1.numChannels.notNil,{
+			if (mixSnare[i]>48.neg.dbamp,{
 				synSnare.add(Synth.head(server,"playx",[
-					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixSnare[i]*ampSnare,\buf,buffer1
-				]));
-			});
-			if (buffer2.numChannels.notNil,{
-				synSnare.add(Synth.head(server,"playx",[
-					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixSnare[i]*ampSnare,\buf,buffer2
+					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
+					\amp1,amp*buf1Amp*mixSnare[i]*ampSnare,\buf1,buffer1,\amp2,amp*buf2Amp*mixSnare[i]*ampSnare,\buf2,buffer2
 				]));
 			});
 		});
