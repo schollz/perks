@@ -2,20 +2,13 @@
 (
 s.waitForBoot({
     l=LorenzosDrums2.new(Server.default,"/path/to/samples");
-});
-)
-
-(
-~kick_riddim="x---x---x---x---";
-~snar_riddim="----x-------x---";
-~kick_riddim="x-x-----x-x-----";
-~snar_riddim="----x--x----x--x";
-~snar_riddim="----x--x----x--4";
-~hiha_riddim="xox-xxx-xxx-xxxx";
-~ride_riddim="x---x---x--x-x--";
-)
-
-(
+    ~kick_riddim="x---x---x---x---";
+    ~snar_riddim="----x-------x---";
+    ~kick_riddim="x-x-----x-x-----";
+    ~snar_riddim="----x--x----x--x";
+    ~snar_riddim="----x--x----x--4";
+    ~hiha_riddim="xox-xxx-xxx-xxxx";
+    ~ride_riddim="x---x---x--x-x--";
     Routine{
         var bpm=160;
         var tpb=60/bpm/4;
@@ -56,5 +49,6 @@ s.waitForBoot({
             });
             (tpb).wait;
         });
-    }.play
+    }.play;
+});
 )

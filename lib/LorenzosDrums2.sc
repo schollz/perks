@@ -99,7 +99,7 @@ LorenzosDrums2 {
 		busMain=Bus.audio(server,2);
 		busReverb=Bus.audio(server,2);
 		busDelay=Bus.audio(server,2);
-		effects=LDEffects.new(server,busMain,busReverb,busDelay);
+		effects=LDEffects2.new(server,busMain,busReverb,busDelay);
 
 		Routine {
 			"loading lorenzo's drumset...".postln;
@@ -999,7 +999,7 @@ LorenzosDrums2 {
 
 
 
-LDEffects {
+LDEffects2 {
 	var synth;
 	*new {
 		arg server, busMain,busReverb,busDelay;
@@ -1007,15 +1007,50 @@ LDEffects {
 	}
 
 	init { arg server, busMain,busReverb, busDelay;
+        var n, mu, unit, expandCurve, compressCurve;
+		var bufs=Dictionary.new();
+
+        n = 512*2;
+        mu = 255*2;
+        unit = Array.fill(n, {|i| i.linlin(0, n-1, -1, 1) });
+        compressCurve = unit.collect({ |x|
+            x.sign * log(1 + mu * x.abs) / log(1 + mu);
+        });
+        expandCurve = unit.collect({ |y|
+            y.sign / mu * ((1+mu)**(y.abs) - 1);
+        });
+
+	    bufs.put("sine",Buffer.alloc(context.server,512,1));
+        bufs.at("sine").sine2([2],[0.5],false); // https://ableton-production.imgix.net/manual/en/Saturator.png?auto=compress%2Cformat&w=716
+        bufs.put("compress",Buffer.loadCollection(context.server,Signal.newFrom(compressCurve).asWavetableNoWrap));
+        bufs.put("expand",Buffer.loadCollection(context.server,Signal.newFrom(expandCurve).asWavetableNoWrap));
 
 		synth = {
 			arg bus,busReverb,busDelay,busMain,hpf=60,hpfqr=0.64,lpf=12000,lpfqr=0.64,
+			sine_drive=0,sine_buf=0,drive=0,
+			compress_curve_wet=0,compress_curve_drive=1,bufCompress,
+            expand_curve_wet=0,expand_curve_drive=1,bufExpand,
 			secondsPerBeat=0.125,delayBeats=4,delayFeedback=0.2;
 			var snd,snd2,sndmain;
 
 			sndmain = In.ar(busMain,2);
+
 			sndmain = RHPF.ar(sndmain,hpf,hpfqr);
 			sndmain = RLPF.ar(sndmain,lpf,lpfqr);
+            // drive
+            sndD = (sndmain * 30.dbamp).tanh * -10.dbamp;
+            sndD = BHiShelf.ar(BLowShelf.ar(sndD, 500, 1, -10), 3000, 1, -10);
+            sndD = (sndD * 10.dbamp).tanh * -10.dbamp;
+            sndD = BHiShelf.ar(BLowShelf.ar(sndD, 500, 1, 10), 3000, 1, 10);
+            sndD = sndD * -10.dbamp;
+            sndmain = SelectX.ar(drive,[sndmain,sndD]);
+            // sinoid drive
+            sndmain=SelectX.ar(Lag.kr(sine_drive),[sndmain,Shaper.ar(sine_buf,snd)]);
+            // compress curve
+            sndmain=SelectX.ar(Lag.kr(compress_curve_wet),[sndmain,Shaper.ar(bufCompress,snd*compress_curve_drive)]);
+            // expand cruve
+            sndmain=SelectX.ar(Lag.kr(expand_curve_wet),[sndmain,Shaper.ar(bufExpand,snd*expand_curve_drive)]);
+
 			Out.ar(bus,sndmain);
 
 			snd = In.ar(busDelay,2);
@@ -1032,7 +1067,11 @@ LDEffects {
 			snd2 = FreeVerb2.ar(snd2[0],snd2[1],room:2);
 
 			Out.ar(bus,snd2);
-		}.play(target:server, args:[\bus,0,\busMain,busMain.index,\busReverb,busReverb.index,\busDelay,busDelay.index], addAction:\addToTail);
+		}.play(target:server, args:[
+			\bus,0,\busMain,busMain.index,\busReverb,busReverb.index,
+			\bufExpand,bufs.at("expand"),\bufCompress,bufs.at("compress"),\sine_buf,bufs.at("sine"),
+			\busDelay,busDelay.index
+		], addAction:\addToTail);
 	}
 
 	setParam {
