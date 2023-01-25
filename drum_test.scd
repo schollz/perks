@@ -13,21 +13,19 @@ s.waitForBoot({
     ~kick_riddim="x-x-------xx----";
     ~kick_riddim="x-x-------x-----";
     ~kick_riddim="--xx------x-----";
-    ~kick_riddim="x-x-----x-x-----";
     ~kick_riddim="x---x---x---x---";
+    ~kick_riddim="x-x-----x-x-----";
     ~snar_riddim="----x--x-x--x--x";
     ~snar_riddim="----x--x----x--x";
     ~snar_riddim="----x--x-x----x-";
     ~snar_riddim="----x--x----x--x";
     ~snar_riddim="----x--x----x--4";
-    ~snar_riddim="----x--x----44x4";
+    ~snar_riddim="----x--x----22x2";
     ~snar_riddim="-x--x--x-x----x-";
     ~hiha_riddim="xox-xxx-xxx-xxxx";
     ~ride_riddim="x-x-x-x-x-x-x-x-";
-    ~hiha_riddim="-";
-    ~ride_riddim="-";
     Routine{
-        var bpm=120;
+        var bpm=180;
         var tpb=60/bpm/4;
 	var snar_vel=[1,1,0,1,1,0,1,0];
 	var kick_vel=[1,0,1,1];
@@ -76,11 +74,12 @@ s.waitForBoot({
                     l.playOH(hihav,1,0,rate,20000,0,0,0);
                 });
             });
-            (tpb+(((slop*2).rand-slop)/1000)).wait;
+            //(tpb+(((slop*2).rand-slop)/1000)).wait;
+            (tpb).wait;
         });
     }.play;
     Routine {
-	8.wait;
+	16.wait;
 	0.exit;
     }.play;
 });

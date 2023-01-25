@@ -762,14 +762,10 @@ LorenzosDrums2 {
 		namesMicRide.do({ arg name,i;
 			var buffer1=bufRide[i][buf1][bufRide[i][buf1].size.rand];
 			var buffer2=bufRide[i][buf2][bufRide[i][buf2].size.rand];
-			if (buffer2.numChannels.notNil,{
+			if (mixRide[i]>48.neg.dbamp,{
 				synRide.add(Synth.head(server,"playx",[
-				\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixRide[i]*ampRide,\buf,buffer1
-			]));
-			});
-			if (buffer2.numChannels.notNil,{
-			synRide.add(Synth.head(server,"playx",[
-				\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixRide[i]*ampRide,\buf,buffer2
+				\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
+				\amp1,amp*buf1Amp*mixRide[i]*ampRide,\buf1,buffer1,\amp2,amp*buf1Amp*mixRide[i]*ampRide,\buf2,buffer2
 			]));
 			});
 		});
