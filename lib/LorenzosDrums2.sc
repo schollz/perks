@@ -480,14 +480,10 @@ LorenzosDrums2 {
 		namesMicCH.do({ arg name,i;
 			var buffer1=bufCH[i][buf1][bufCH[i][buf1].size.rand];
 			var buffer2=bufCH[i][buf2][bufCH[i][buf2].size.rand];
-			if (buffer1.numChannels.notNil,{
+			if (mixCH[i]>48.neg.dbamp,{
 				synCH.add(Synth.head(server,"playx",[
-					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixCH[i]*ampCH,\buf,buffer1
-				]));
-			});
-			if (buffer2.numChannels.notNil,{
-				synCH.add(Synth.head(server,"playx",[
-					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixCH[i]*ampCH,\buf,buffer2
+					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
+					\amp1,amp*buf1Amp*mixCH[i]*ampCH,\buf1,buffer1,\amp2,amp*buf2Amp*mixCH[i]*ampCH,\buf2,buffer2
 				]));
 			});
 		});
@@ -546,14 +542,10 @@ LorenzosDrums2 {
 		namesMicOH.do({ arg name,i;
 			var buffer1=bufOH[i][buf1][bufOH[i][buf1].size.rand];
 			var buffer2=bufOH[i][buf2][bufOH[i][buf2].size.rand];
-			if (buffer1.numChannels.notNil,{
+			if (mixOH[i]>48.neg.dbamp,{
 				synOH.add(Synth.head(server,"playx",[
-					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixOH[i]*ampOH,\buf,buffer1
-				]));
-			});
-			if (buffer2.numChannels.notNil,{
-				synOH.add(Synth.head(server,"playx",[
-					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixOH[i]*ampOH,\buf,buffer2
+					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
+					\amp1,amp*buf1Amp*mixOH[i]*ampOH,\buf1,buffer1,\amp2,amp*buf1Amp*mixOH[i]*ampOH,\buf2,buffer2
 				]));
 			});
 		});
