@@ -26,7 +26,7 @@ s.waitForBoot({
             var snar=~snar_riddim[beat].asString;
             var hiha=~hiha_riddim[beat].asString;
             var ride=~hiha_riddim[beat].asString;
-	    var snarv=snar_vel[i.mod(snar_vel.size)]*30+60
+	    var snarv=snar_vel[i.mod(snar_vel.size)]*30+60;
             if (kick=="x",{
                 l.playKick(60,1,0,1,20000,0,0,0);
             });
@@ -37,7 +37,7 @@ s.waitForBoot({
                 // roll
                 Routine{
                     snar.asInteger.do({ arg j;
-	    		var snarv2=snar_vel[(i+j).mod(snar_vel.size)]*30+60
+	    		var snarv2=snar_vel[(i+j).mod(snar_vel.size)]*30+60;
                         l.playSnare(snarv2,1,0,1,20000,0,0,0);
                         (tpb/snar.asInteger).wait;
                     })

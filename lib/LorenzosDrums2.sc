@@ -1033,13 +1033,13 @@ LDEffects2 {
             sndD = (sndD * 10.dbamp).tanh * -10.dbamp;
             sndD = BHiShelf.ar(BLowShelf.ar(sndD, 500, 1, 10), 3000, 1, 10);
             sndD = sndD * -10.dbamp;
-            //sndmain = SelectX.ar(drive,[sndmain,sndD]);
+            sndmain = SelectX.ar(drive,[sndmain,sndD]);
             // sinoid drive
-            //sndmain=SelectX.ar(Lag.kr(sine_drive),[sndmain,Shaper.ar(sine_buf,snd)]);
+            sndmain=SelectX.ar(Lag.kr(sine_drive),[sndmain,Shaper.ar(sine_buf,sndmain)]);
             // compress curve
-            //sndmain=SelectX.ar(Lag.kr(compress_curve_wet),[sndmain,Shaper.ar(bufCompress,snd*compress_curve_drive)]);
+            sndmain=SelectX.ar(Lag.kr(compress_curve_wet),[sndmain,Shaper.ar(bufCompress,sndmain*compress_curve_drive)]);
             // expand cruve
-            //sndmain=SelectX.ar(Lag.kr(expand_curve_wet),[sndmain,Shaper.ar(bufExpand,snd*expand_curve_drive)]);
+            sndmain=SelectX.ar(Lag.kr(expand_curve_wet),[sndmain,Shaper.ar(bufExpand,sndmain*expand_curve_drive)]);
 
 			Out.ar(bus,sndmain);
 
