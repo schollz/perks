@@ -116,7 +116,7 @@ LorenzosDrums2 {
 			bufKick=Array.fill(namesMicKick.size,{arg h;
 				Array.fill(namesKick.size,{ arg i;
 					Array.fill(namesKick[i].size,{ arg j;
-						 Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicKick[h]++Platform.pathSeparator++namesKick[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						 Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicKick[h]++Platform.pathSeparator++namesKick[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -137,7 +137,7 @@ LorenzosDrums2 {
 			bufSnare=Array.fill(namesMicSnare.size,{arg h;
 				Array.fill(namesSnare.size,{ arg i;
 					Array.fill(namesSnare[i].size,{ arg j;
-						Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicSnare[h]++Platform.pathSeparator++namesSnare[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicSnare[h]++Platform.pathSeparator++namesSnare[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -159,7 +159,7 @@ LorenzosDrums2 {
 			bufCH=Array.fill(namesMicCH.size,{arg h;
 				Array.fill(namesCH.size,{ arg i;
 					Array.fill(namesCH[i].size,{ arg j;
-						Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicCH[h]++Platform.pathSeparator++namesCH[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicCH[h]++Platform.pathSeparator++namesCH[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -183,7 +183,7 @@ LorenzosDrums2 {
 			bufOH=Array.fill(namesMicOH.size,{arg h;
 				Array.fill(namesOH.size,{ arg i;
 					Array.fill(namesOH[i].size,{ arg j;
-						Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicOH[h]++Platform.pathSeparator++namesOH[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicOH[h]++Platform.pathSeparator++namesOH[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -203,7 +203,7 @@ LorenzosDrums2 {
 			bufTom1=Array.fill(namesMicTom1.size,{arg h;
 				Array.fill(namesTom1.size,{ arg i;
 					Array.fill(namesTom1[i].size,{ arg j;
-						Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicTom1[h]++Platform.pathSeparator++namesTom1[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicTom1[h]++Platform.pathSeparator++namesTom1[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -224,7 +224,7 @@ LorenzosDrums2 {
 			bufTom2=Array.fill(namesMicTom2.size,{arg h;
 				Array.fill(namesTom2.size,{ arg i;
 					Array.fill(namesTom2[i].size,{ arg j;
-						 Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicTom2[h]++Platform.pathSeparator++namesTom2[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						 Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicTom2[h]++Platform.pathSeparator++namesTom2[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -245,7 +245,7 @@ LorenzosDrums2 {
 			bufTom3=Array.fill(namesMicTom3.size,{arg h;
 				Array.fill(namesTom3.size,{ arg i;
 					Array.fill(namesTom3[i].size,{ arg j;
-						Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicTom3[h]++Platform.pathSeparator++namesTom3[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicTom3[h]++Platform.pathSeparator++namesTom3[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -265,7 +265,7 @@ LorenzosDrums2 {
 			bufRide=Array.fill(namesMicRide.size,{arg h;
 				Array.fill(namesRide.size,{ arg i;
 					Array.fill(namesRide[i].size,{ arg j;
-						Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicRide[h]++Platform.pathSeparator++namesRide[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicRide[h]++Platform.pathSeparator++namesRide[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -285,7 +285,7 @@ LorenzosDrums2 {
 			bufCS=Array.fill(namesMicCS.size,{arg h;
 				Array.fill(namesCS.size,{ arg i;
 					Array.fill(namesCS[i].size,{ arg j;
-						Buffer.read(server,folderToSamples++Platform.pathSeparator++namesMicCS[h]++Platform.pathSeparator++namesCS[i][j]++".wav",action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
+						Buffer.readChannel(server,folderToSamples++Platform.pathSeparator++namesMicCS[h]++Platform.pathSeparator++namesCS[i][j]++".wav",channels:[0],action:{arg fname; NetAddr("127.0.0.1",10111).sendMsg("load",1);});
 					});
 				});
 				
@@ -302,30 +302,20 @@ LorenzosDrums2 {
 
 		
 		// basic players
-		2.do({
-			arg i;
-			var ch1=i+1;
-			var split1=3-ch1;
-			2.do({
-				arg j;
-				var ch2=i+1;
-				var split2=3-ch2;
-				SynthDef("playx"++ch1++ch2,{
+				SynthDef("playx",{
 					arg out=0,pan=0,reverbOut,reverbSend=0,t_trig=1,rate=1,fade_trig=0,fade_time=0.1,startPos=0,
 					buf1,amp1=1.0,buf2,amp2=1.0,
 					lpf=18000,busReverb,busDelay,sendReverb=0,sendDelay=0;
 					var snd;
-					snd=amp1*(PlayBuf.ar(ch1,buf1,rate,t_trig,startPos:startPos*BufFrames.ir(buf1))!split1);
-					snd=snd+(amp2*(PlayBuf.ar(ch2,buf2,rate,t_trig,startPos:startPos*BufFrames.ir(buf2))!split2));
+					snd=amp1*(PlayBuf.ar(1,buf1,rate,t_trig,startPos:startPos*BufFrames.ir(buf1)));
+					snd=snd+(amp2*(PlayBuf.ar(1,buf2,rate,t_trig,startPos:startPos*BufFrames.ir(buf2))));
 					DetectSilence.ar(snd,0.0001,doneAction:2);
 					snd=snd*EnvGen.ar(Env.new([1,0],[fade_time]),fade_trig,doneAction:2);
-					snd=Balance2.ar(snd[0],snd[1],pan);
+					snd=Pan2.ar(snd,pan);
 					Out.ar(out,snd);
 					Out.ar(busReverb,snd*sendReverb);
 					Out.ar(busDelay,snd*sendDelay);
 				}).send(server);
-			})
-		})
 		
 		"done loading.".postln;
 	}
@@ -379,7 +369,7 @@ LorenzosDrums2 {
 			var buffer1=bufKick[i][buf1][bufKick[i][buf1].size.rand];
 			var buffer2=bufKick[i][buf2][bufKick[i][buf2].size.rand];
 			if (mixKick[i]>48.neg.dbamp,{
-				synKick.add(Synth.head(server,"playx"++buffer1.numChannels++buffer2.numChannels,[
+				synKick.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
 					\amp1,amp*buf1Amp*mixKick[i]*ampKick,\buf1,buffer1,\amp2,amp*buf2Amp*mixKick[i]*ampKick,\buf2,buffer2
 				]));
@@ -430,12 +420,12 @@ LorenzosDrums2 {
 			var buffer1=bufSnare[i][buf1][bufSnare[i][buf1].size.rand];
 			var buffer2=bufSnare[i][buf2][bufSnare[i][buf2].size.rand];
 			if (buffer1.numChannels.notNil,{
-				synSnare.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synSnare.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixSnare[i]*ampSnare,\buf,buffer1
 				]));
 			});
 			if (buffer2.numChannels.notNil,{
-				synSnare.add(Synth.head(server,"playx"++buffer2.numChannels,[
+				synSnare.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixSnare[i]*ampSnare,\buf,buffer2
 				]));
 			});
@@ -496,12 +486,12 @@ LorenzosDrums2 {
 			var buffer1=bufCH[i][buf1][bufCH[i][buf1].size.rand];
 			var buffer2=bufCH[i][buf2][bufCH[i][buf2].size.rand];
 			if (buffer1.numChannels.notNil,{
-				synCH.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synCH.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixCH[i]*ampCH,\buf,buffer1
 				]));
 			});
 			if (buffer2.numChannels.notNil,{
-				synCH.add(Synth.head(server,"playx"++buffer2.numChannels,[
+				synCH.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixCH[i]*ampCH,\buf,buffer2
 				]));
 			});
@@ -562,12 +552,12 @@ LorenzosDrums2 {
 			var buffer1=bufOH[i][buf1][bufOH[i][buf1].size.rand];
 			var buffer2=bufOH[i][buf2][bufOH[i][buf2].size.rand];
 			if (buffer1.numChannels.notNil,{
-				synOH.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synOH.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixOH[i]*ampOH,\buf,buffer1
 				]));
 			});
 			if (buffer2.numChannels.notNil,{
-				synOH.add(Synth.head(server,"playx"++buffer2.numChannels,[
+				synOH.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixOH[i]*ampOH,\buf,buffer2
 				]));
 			});
@@ -618,12 +608,12 @@ LorenzosDrums2 {
 			var buffer1=bufTom1[i][buf1][bufTom1[i][buf1].size.rand];
 			var buffer2=bufTom1[i][buf2][bufTom1[i][buf2].size.rand];
 			if (buffer1.numChannels.notNil,{
-				synTom1.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synTom1.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixTom1[i]*ampTom1,\buf,buffer1
 				]));
 			});
 			if (buffer2.numChannels.notNil,{
-				synTom1.add(Synth.head(server,"playx"++buffer2.numChannels,[
+				synTom1.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixTom1[i]*ampTom1,\buf,buffer2
 				]));
 			});
@@ -672,12 +662,12 @@ LorenzosDrums2 {
 			var buffer1=bufTom2[i][buf1][bufTom2[i][buf1].size.rand];
 			var buffer2=bufTom2[i][buf2][bufTom2[i][buf2].size.rand];
 			if (buffer1.numChannels.notNil,{
-				synTom2.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synTom2.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixTom2[i]*ampTom2,\buf,buffer1
 				]));
 			});
 			if (buffer2.numChannels.notNil,{
-				synTom2.add(Synth.head(server,"playx"++buffer2.numChannels,[
+				synTom2.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixTom2[i]*ampTom2,\buf,buffer2
 				]));
 			});
@@ -728,12 +718,12 @@ LorenzosDrums2 {
 			var buffer1=bufTom3[i][buf1][bufTom3[i][buf1].size.rand];
 			var buffer2=bufTom3[i][buf2][bufTom3[i][buf2].size.rand];
 			if (buffer1.numChannels.notNil,{
-				synTom3.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synTom3.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixTom3[i]*ampTom3,\buf,buffer1
 				]));
 			});
 			if (buffer2.numChannels.notNil,{
-				synTom3.add(Synth.head(server,"playx"++buffer2.numChannels,[
+				synTom3.add(Synth.head(server,"playx",[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixTom3[i]*ampTom3,\buf,buffer2
 				]));
 			});
@@ -786,12 +776,12 @@ LorenzosDrums2 {
 			var buffer1=bufRide[i][buf1][bufRide[i][buf1].size.rand];
 			var buffer2=bufRide[i][buf2][bufRide[i][buf2].size.rand];
 			if (buffer2.numChannels.notNil,{
-				synRide.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synRide.add(Synth.head(server,"playx",[
 				\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixRide[i]*ampRide,\buf,buffer1
 			]));
 			});
 			if (buffer2.numChannels.notNil,{
-			synRide.add(Synth.head(server,"playx"++buffer2.numChannels,[
+			synRide.add(Synth.head(server,"playx",[
 				\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixRide[i]*ampRide,\buf,buffer2
 			]));
 			});
@@ -848,12 +838,12 @@ LorenzosDrums2 {
 			var buffer1=bufCS[i][buf1][bufCS[i][buf1].size.rand];
 			var buffer2=bufCS[i][buf2][bufCS[i][buf2].size.rand];
 			if (buffer2.numChannels.notNil,{
-				synCS.add(Synth.head(server,"playx"++buffer1.numChannels,[
+				synCS.add(Synth.head(server,"playx",[
 				\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf1Amp*mixCS[i]*ampCS,\buf,buffer1
 			]));
 			});
 			if (buffer2.numChannels.notNil,{
-			synCS.add(Synth.head(server,"playx"++buffer2.numChannels,[
+			synCS.add(Synth.head(server,"playx",[
 				\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,\amp,amp*buf2Amp*mixCS[i]*ampCS,\buf,buffer2
 			]));
 			});
@@ -1020,10 +1010,10 @@ LDEffects2 {
             y.sign / mu * ((1+mu)**(y.abs) - 1);
         });
 
-	    bufs.put("sine",Buffer.alloc(context.server,512,1));
+	    bufs.put("sine",Buffer.alloc(server,512,1));
         bufs.at("sine").sine2([2],[0.5],false); // https://ableton-production.imgix.net/manual/en/Saturator.png?auto=compress%2Cformat&w=716
-        bufs.put("compress",Buffer.loadCollection(context.server,Signal.newFrom(compressCurve).asWavetableNoWrap));
-        bufs.put("expand",Buffer.loadCollection(context.server,Signal.newFrom(expandCurve).asWavetableNoWrap));
+        bufs.put("compress",Buffer.loadCollection(server,Signal.newFrom(compressCurve).asWavetableNoWrap));
+        bufs.put("expand",Buffer.loadCollection(server,Signal.newFrom(expandCurve).asWavetableNoWrap));
 
 		synth = {
 			arg bus,busReverb,busDelay,busMain,hpf=60,hpfqr=0.64,lpf=12000,lpfqr=0.64,
@@ -1031,7 +1021,7 @@ LDEffects2 {
 			compress_curve_wet=0,compress_curve_drive=1,bufCompress,
             expand_curve_wet=0,expand_curve_drive=1,bufExpand,
 			secondsPerBeat=0.125,delayBeats=4,delayFeedback=0.2;
-			var snd,snd2,sndmain;
+			var snd,snd2,sndmain,sndD;
 
 			sndmain = In.ar(busMain,2);
 
@@ -1043,13 +1033,13 @@ LDEffects2 {
             sndD = (sndD * 10.dbamp).tanh * -10.dbamp;
             sndD = BHiShelf.ar(BLowShelf.ar(sndD, 500, 1, 10), 3000, 1, 10);
             sndD = sndD * -10.dbamp;
-            sndmain = SelectX.ar(drive,[sndmain,sndD]);
+            //sndmain = SelectX.ar(drive,[sndmain,sndD]);
             // sinoid drive
-            sndmain=SelectX.ar(Lag.kr(sine_drive),[sndmain,Shaper.ar(sine_buf,snd)]);
+            //sndmain=SelectX.ar(Lag.kr(sine_drive),[sndmain,Shaper.ar(sine_buf,snd)]);
             // compress curve
-            sndmain=SelectX.ar(Lag.kr(compress_curve_wet),[sndmain,Shaper.ar(bufCompress,snd*compress_curve_drive)]);
+            //sndmain=SelectX.ar(Lag.kr(compress_curve_wet),[sndmain,Shaper.ar(bufCompress,snd*compress_curve_drive)]);
             // expand cruve
-            sndmain=SelectX.ar(Lag.kr(expand_curve_wet),[sndmain,Shaper.ar(bufExpand,snd*expand_curve_drive)]);
+            //sndmain=SelectX.ar(Lag.kr(expand_curve_wet),[sndmain,Shaper.ar(bufExpand,snd*expand_curve_drive)]);
 
 			Out.ar(bus,sndmain);
 

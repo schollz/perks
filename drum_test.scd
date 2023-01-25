@@ -1,7 +1,7 @@
 
 (
 s.waitForBoot({
-    l=LorenzosDrums2.new(Server.default,"/path/to/samples");
+    l=LorenzosDrums2.new(Server.default,"/home/zns/Documents/perks/lorenzos-drums/");
     ~kick_riddim="x---x---x---x---";
     ~snar_riddim="----x-------x---";
     ~kick_riddim="x-x-----x-x-----";
