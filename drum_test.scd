@@ -20,6 +20,7 @@ s.waitForBoot({
         var bpm=160;
         var tpb=60/bpm/4;
 	var snar_vel=[1,1,0,1,1,0,1,0];
+	var slop=20; // +/- milliseconds
         inf.do({  arg i;
             var beat=i.mod(16);
             var kick=~kick_riddim[beat].asString;
@@ -58,6 +59,9 @@ s.waitForBoot({
                 });
             });
             (tpb).wait;
+	    if (slop>0,{
+	    	(((slop*2).rand-slop)/1000).wait;
+	    });
         });
     }.play;
 });
