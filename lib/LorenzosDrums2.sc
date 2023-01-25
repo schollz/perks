@@ -310,6 +310,7 @@ LorenzosDrums2 {
 					snd=amp1*(PlayBuf.ar(1,buf1,rate,t_trig,startPos:startPos*BufFrames.ir(buf1)));
 					snd=snd+(amp2*(PlayBuf.ar(1,buf2,rate,t_trig,startPos:startPos*BufFrames.ir(buf2))));
 					DetectSilence.ar(snd,0.0001,doneAction:2);
+					snd=snd*EnvGen.ar(Env.new([0,1],[0.005]));
 					snd=snd*EnvGen.ar(Env.new([1,0],[fade_time]),fade_trig,doneAction:2);
 					snd=Pan2.ar(snd,pan);
 					Out.ar(out,snd);
