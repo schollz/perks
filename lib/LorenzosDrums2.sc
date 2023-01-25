@@ -317,7 +317,7 @@ LorenzosDrums2 {
 					Out.ar(busReverb,snd*sendReverb);
 					Out.ar(busDelay,snd*sendDelay);
 				}).send(server);
-		
+		server.sync;
 		"done loading.".postln;
 	}
 	
@@ -992,6 +992,7 @@ LorenzosDrums2 {
 
 LDEffects2 {
 	var synth;
+	var bufs;
 	*new {
 		arg server, busMain,busReverb,busDelay;
 		^super.new.init(server, busMain,busReverb, busDelay);
@@ -999,7 +1000,8 @@ LDEffects2 {
 
 	init { arg server, busMain,busReverb, busDelay;
         var n, mu, unit, expandCurve, compressCurve;
-		var bufs=Dictionary.new();
+	
+	bufs=Dictionary.new();
 
         n = 512*2;
         mu = 255*2;
@@ -1011,7 +1013,7 @@ LDEffects2 {
             y.sign / mu * ((1+mu)**(y.abs) - 1);
         });
 
-	    bufs.put("sine",Buffer.alloc(server,512,1));
+	bufs.put("sine",Buffer.alloc(server,512,1));
         bufs.at("sine").sine2([2],[0.5],false); // https://ableton-production.imgix.net/manual/en/Saturator.png?auto=compress%2Cformat&w=716
         bufs.put("compress",Buffer.loadCollection(server,Signal.newFrom(compressCurve).asWavetableNoWrap));
         bufs.put("expand",Buffer.loadCollection(server,Signal.newFrom(expandCurve).asWavetableNoWrap));
@@ -1072,5 +1074,8 @@ LDEffects2 {
 
 	free {
 		synth.free;
+		bufs.keysValuesDo({ arg buf, val;
+	            val.free;
+		});
 	}
 }

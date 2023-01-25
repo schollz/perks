@@ -2,6 +2,12 @@
 (
 s.waitForBoot({
     l=LorenzosDrums2.new(Server.default,"/home/zns/Documents/perks/lorenzos-drums/");
+    l.setFxParam("sine_drive",0.3);
+    l.setFxParam("drive",0.5);
+    l.setFxParam("compress_curve_wet",0.05);
+    l.setFxParam("compress_curve_drive",1);
+    l.setFxParam("expand_curve_wet",0.05);
+    l.setFxParam("expand_curve_drive",1);
     ~kick_riddim="x---x---x---x---";
     ~kick_riddim="x-x-----x-x-----";
     ~kick_riddim="x-x-------xx----";
