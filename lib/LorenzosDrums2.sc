@@ -294,29 +294,27 @@ LorenzosDrums2 {
 			mixCS=Array.fill(namesMicCS.size,{1/namesMicCS.size});
 
 
-
-			server.sync;
 			"samples loaded!".postln;
 			NetAddr("127.0.0.1", 10111).sendMsg("done",1);   
 		}.play;
 
 		
 		// basic players
-				SynthDef("playx",{
-					arg out=0,pan=0,reverbOut,reverbSend=0,t_trig=1,rate=1,fade_trig=0,fade_time=0.1,startPos=0,
-					buf1,amp1=1.0,buf2,amp2=1.0,
-					lpf=18000,busReverb,busDelay,sendReverb=0,sendDelay=0;
-					var snd;
-					snd=amp1*(PlayBuf.ar(1,buf1,rate,t_trig,startPos:startPos*BufFrames.ir(buf1)));
-					snd=snd+(amp2*(PlayBuf.ar(1,buf2,rate,t_trig,startPos:startPos*BufFrames.ir(buf2))));
-					DetectSilence.ar(snd,0.0001,doneAction:2);
-					snd=snd*EnvGen.ar(Env.new([0,1],[0.005]));
-					snd=snd*EnvGen.ar(Env.new([1,0],[fade_time]),fade_trig,doneAction:2);
-					snd=Pan2.ar(snd,pan);
-					Out.ar(out,snd);
-					Out.ar(busReverb,snd*sendReverb);
-					Out.ar(busDelay,snd*sendDelay);
-				}).send(server);
+		SynthDef("playx",{
+			arg out=0,pan=0,reverbOut,reverbSend=0,t_trig=1,rate=1,fade_trig=0,fade_time=0.1,startPos=0,
+			buf1,amp1=1.0,buf2,amp2=1.0,
+			lpf=18000,busReverb,busDelay,sendReverb=0,sendDelay=0;
+			var snd;
+			snd=amp1*(PlayBuf.ar(1,buf1,rate,t_trig,startPos:startPos*BufFrames.ir(buf1)));
+			snd=snd+(amp2*(PlayBuf.ar(1,buf2,rate,t_trig,startPos:startPos*BufFrames.ir(buf2))));
+			DetectSilence.ar(snd,0.0001,doneAction:2);
+			snd=snd*EnvGen.ar(Env.new([0,1],[0.005]));
+			snd=snd*EnvGen.ar(Env.new([1,0],[fade_time]),fade_trig,doneAction:2);
+			snd=Pan2.ar(snd,pan);
+			Out.ar(out,snd);
+			Out.ar(busReverb,snd*sendReverb);
+			Out.ar(busDelay,snd*sendDelay);
+		}).send(server);
 		server.sync;
 		"done loading.".postln;
 	}

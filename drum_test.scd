@@ -20,6 +20,7 @@ s.waitForBoot({
     ~snar_riddim="-x--x--x-x----x-";
     ~snar_riddim="----x--x----x--x";
     ~snar_riddim="----x--x----x--4";
+    ~snar_riddim="----x--x----44x4";
     ~hiha_riddim="xox-xxx-xxx-xxxx";
     ~ride_riddim="x-x-x-x-x-x-x-x-";
     Routine{
