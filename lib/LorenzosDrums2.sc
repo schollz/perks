@@ -1,5 +1,5 @@
 // https://www.pianobook.co.uk/packs/lorenzos-drums-v1/
-LorenzosDrums {
+LorenzosDrums2 {
 	
 	var server;
 	var effects;
