@@ -88,6 +88,38 @@ s.waitForBoot({
 	s.sync;
 
 	Synth.new("final",[],s,\addToTail);
+	
+	~fnexdash={
+		arg exdash,beat;
+		var result=[0,0]; // [hits, beats]
+		var n=exdash.size;
+		var i=beat.mod(n);
+		var cur=exdash[i].asString;
+		[exdash,beat,i,exdash[i]].postln;
+		if (cur=="x",{
+			result[0]=1;
+			result[1]=1;
+		},{
+			if (cur.asInteger>0,{
+				result[0]=cur.asInteger;
+			});
+		});
+		if (result[0]>0,{
+			var ok=true;
+			result[1]=1;
+			(n-i-1).do({ arg j;
+				var k=j+i+1;
+				if (ok,{
+					if (exdash[k].asString=="+",{
+					result[1]=result[1]+1;
+
+					},{ok=false;});
+				});
+			});
+		});
+
+		result
+	};
 
 	~kick_riddim="x-x-x-x-x-x-----";
 	~kick_riddim="x---x---x---x-2-";
@@ -173,7 +205,7 @@ s.waitForBoot({
 		t.schedAbs(0, { arg i, sec;
 			var rate=1.5;
 			var beat=i.mod(16);
-			var kick=~kick_riddim[i.mod(~kick_riddim.size)].asString;
+			var kick=~fnexdash(~kick_riddim,i);//~kick_riddim[i.mod(~kick_riddim.size)].asString;
 			var snar=~snar_riddim[i.mod(~snar_riddim.size)].asString;
 			var hiha=~hiha_riddim[i.mod(~hiha_riddim.size)].asString;
 			var ride=~ride_riddim[i.mod(~ride_riddim.size)].asString;
@@ -196,11 +228,12 @@ s.waitForBoot({
 			},{
 				Synth("jp",[\freq,note.midicps,\mix,(90+10.rand)/100,\detune,(25+30.rand)/100,\amp,syncs[i.mod(syncs.size)]]);
 			});
-			if (kick.asInteger>0,{
+
+			if (kick[0]>1,{
 				// roll
-				l.playKick(kickv,1,0,rate,20000,0,0,0,kick.asInteger,kick.asInteger.asFloat*2.0*bpm/60*2);
+				l.playKick(kickv,1,0,rate,20000,0,0,0,kick[0],4.0*bpm/60/kick[1].asFloat);
 			},{
-				if (kick=="x",{
+				if (kick[0]>0,{
 					l.playKick(kickv,1,0,rate,20000,0,0,0,0,0);
 				});
 			});
