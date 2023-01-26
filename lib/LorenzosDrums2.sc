@@ -319,13 +319,14 @@ LorenzosDrums2 {
 		// retrigger
 		SynthDef("playxRetrig",{
 			arg out=0,pan=0,reverbOut,reverbSend=0,t_trig=1,rate=1,fade_trig=0,fade_time=0.1,startPos=0,
-			buf1,amp1=1.0,buf2,amp2=1.0,retrig=0,retrig_rate=2,
+			buf1,amp1=1.0,buf2,amp2=1.0,retrig=0,retrig_rate=2,ramp=1,
 			lpf=18000,busReverb,busDelay,sendReverb=0,sendDelay=0;
 			var snd,sndA,sndB;
-			var trig=LFPulse.kr(retrig_rate.poll)>0;
+			var trig=LFPulse.kr(retrig_rate)>0;
 			var selectT=ToggleFF.kr(trig);
 			var steps=Stepper.kr(trig,max:10000);
 			var select=Gate.kr(selectT,(steps<(retrig+1)));
+			var volumeRamp=Line.ar(0.1,(amp1+amp2)/2,retrig/retrig_rate);
 			sndA=amp1*(PlayBuf.ar(1,buf1,rate,select,startPos:startPos*BufFrames.ir(buf1)));
 			sndA=sndA+(amp2*(PlayBuf.ar(1,buf2,rate,select,startPos:startPos*BufFrames.ir(buf2))));
 			sndB=amp1*(PlayBuf.ar(1,buf1,rate,1-select,startPos:startPos*BufFrames.ir(buf1)));
@@ -335,6 +336,7 @@ LorenzosDrums2 {
 			snd=snd*EnvGen.ar(Env.new([0,1],[0.005]));
 			snd=snd*EnvGen.ar(Env.new([1,0],[fade_time]),fade_trig,doneAction:2);
 			snd=Pan2.ar(snd,pan);
+			snd=Select.ar(ramp,[snd,snd*volumeRamp]);
 			Out.ar(out,snd);
 			Out.ar(busReverb,snd*sendReverb);
 			Out.ar(busDelay,snd*sendDelay);
@@ -365,8 +367,10 @@ LorenzosDrums2 {
 
 
 	playKick {
-		arg velocity, amp, pan, rate, lpf, sendReverb, sendDelay, startPos;
+		arg velocity, amp, pan, rate, lpf, sendReverb, sendDelay, startPos,retrig,retrig_rate;
 		var triggered=false;
+		var synthdefName="playx";
+
 		// <assignSamples>
 		var names=namesKick;
 		var buf1,buf2,buf1Amp,buf2Amp;
@@ -388,13 +392,16 @@ LorenzosDrums2 {
 			});
 		});
 		synKick=Array.new(namesMicKick.size*2);
+		if (retrig>0,{
+			synthdefName="playxRetrig";
+		});
 		namesMicKick.do({ arg name,i;
 			var buffer1=bufKick[i][buf1][bufKick[i][buf1].size.rand];
 			var buffer2=bufKick[i][buf2][bufKick[i][buf2].size.rand];
 			if (mixKick[i]>48.neg.dbamp,{
-				synKick.add(Synth.head(server,"playx",[
+				synKick.add(Synth.head(server,synthdefName,[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
-					\amp1,amp*buf1Amp*mixKick[i]*ampKick,\buf1,buffer1,\amp2,amp*buf2Amp*mixKick[i]*ampKick,\buf2,buffer2
+					\amp1,amp*buf1Amp*mixKick[i]*ampKick,\buf1,buffer1,\amp2,amp*buf2Amp*mixKick[i]*ampKick,\buf2,buffer2,\retrig,retrig,\retrig_rate,retrig_rate,\ramp,0,
 				]));
 			});
 		});
@@ -474,9 +481,10 @@ LorenzosDrums2 {
 
 
 	playCH {
-		arg velocity, amp, pan, rate, lpf, sendReverb, sendDelay, startPos;
+		arg velocity, amp, pan, rate, lpf, sendReverb, sendDelay, startPos, retrig, retrig_rate;
 		var triggered=false;
 		var isrunning=false;
+		var synthdefName="playx";
 		// <assignSamples>
 		var names=namesCH;
 		var buf1,buf2,buf1Amp,buf2Amp;
@@ -505,13 +513,16 @@ LorenzosDrums2 {
 			});
 		});
 		synCH=Array.new(namesMicCH.size*2);
+		if (retrig>0,{
+			synthdefName="playxRetrig";
+		});
 		namesMicCH.do({ arg name,i;
 			var buffer1=bufCH[i][buf1][bufCH[i][buf1].size.rand];
 			var buffer2=bufCH[i][buf2][bufCH[i][buf2].size.rand];
 			if (mixCH[i]>48.neg.dbamp,{
-				synCH.add(Synth.head(server,"playx",[
+				synCH.add(Synth.head(server,synthdefName,[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
-					\amp1,amp*buf1Amp*mixCH[i]*ampCH,\buf1,buffer1,\amp2,amp*buf2Amp*mixCH[i]*ampCH,\buf2,buffer2
+					\amp1,amp*buf1Amp*mixCH[i]*ampCH,\buf1,buffer1,\amp2,amp*buf2Amp*mixCH[i]*ampCH,\buf2,buffer2,\retrig,retrig,\retrig_rate,retrig_rate,\ramp,1
 				]));
 			});
 		});
