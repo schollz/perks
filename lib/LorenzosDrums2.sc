@@ -323,6 +323,8 @@ LorenzosDrums2 {
 			lpf=18000,busReverb,busDelay,sendReverb=0,sendDelay=0;
 			var snd,sndA,sndB;
 			var trig=LFPulse.kr(retrig_rate)>0;
+			// TODO: add amplitude variations
+			var accent=(LFPulse.kr(retrig_rate)>0)*0.5+1; // 1->1.5
 			var selectT=ToggleFF.kr(trig);
 			var steps=Stepper.kr(trig,max:10000);
 			var select=Gate.kr(selectT,(steps<(retrig+1)));
@@ -336,7 +338,8 @@ LorenzosDrums2 {
 			snd=snd*EnvGen.ar(Env.new([0,1],[0.005]));
 			snd=snd*EnvGen.ar(Env.new([1,0],[fade_time]),fade_trig,doneAction:2);
 			snd=Pan2.ar(snd,pan);
-			snd=Select.ar(ramp,[snd,snd*volumeRamp]);
+			snd=Select.ar(ramp,[snd,snd*volumeRamp])
+			snd=snd*accent;
 			Out.ar(out,snd);
 			Out.ar(busReverb,snd*sendReverb);
 			Out.ar(busDelay,snd*sendDelay);
