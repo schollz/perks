@@ -319,16 +319,18 @@ LorenzosDrums2 {
 		// retrigger
 		SynthDef("playxRetrig",{
 			arg out=0,pan=0,reverbOut,reverbSend=0,t_trig=1,rate=1,fade_trig=0,fade_time=0.1,startPos=0,
-			buf1,amp1=1.0,buf2,amp2=1.0,retrig=0,
+			buf1,amp1=1.0,buf2,amp2=1.0,retrig=0,retrig_rate=2,
 			lpf=18000,busReverb,busDelay,sendReverb=0,sendDelay=0;
 			var snd,sndA,sndB;
-			var trig=Impulse.kr(0)+Impulse.kr(retrig);
-			var select=ToggleFF.kr(trig,0.05);
+			var trig=Trig.kr(Phasor.kr(1,rate:server.options.blockSize,end:(server.sampleRate/retrig_rate).round)<(2*server.options.blockSize));
+			var selectT=ToggleFF.kr(trig);
+			var steps=Stepper.kr(trig,max:10000);
+			var select=Gate.kr(selectT,(steps<(retrig+1)));
 			sndA=amp1*(PlayBuf.ar(1,buf1,rate,Trig.kr(select),startPos:startPos*BufFrames.ir(buf1)));
 			sndA=sndA+(amp2*(PlayBuf.ar(1,buf2,rate,Trig.kr(select),startPos:startPos*BufFrames.ir(buf2))));
 			sndB=amp1*(PlayBuf.ar(1,buf1,rate,Trig.kr(1-select),startPos:startPos*BufFrames.ir(buf1)));
 			sndB=sndB+(amp2*(PlayBuf.ar(1,buf2,rate,Trig.kr(1-select),startPos:startPos*BufFrames.ir(buf2))));
-			snd=SelectX.ar(Lag.kr(select),[sndB,sndA]);
+			snd=SelectX.ar(Lag.kr(select,0.01),[sndB,sndA]);
 			DetectSilence.ar(snd,0.0001,doneAction:2);
 			snd=snd*EnvGen.ar(Env.new([0,1],[0.005]));
 			snd=snd*EnvGen.ar(Env.new([1,0],[fade_time]),fade_trig,doneAction:2);
@@ -414,7 +416,7 @@ LorenzosDrums2 {
 	}
 	
 	playSnare {
-		arg velocity, amp, pan, rate, lpf, sendReverb, sendDelay, startPos,retrig;
+		arg velocity, amp, pan, rate, lpf, sendReverb, sendDelay, startPos,retrig,retrig_rate;
 		var triggered=false;
 		var synthdefName="playx";
 		// <assignSamples>
@@ -447,7 +449,7 @@ LorenzosDrums2 {
 			if (mixSnare[i]>48.neg.dbamp,{
 				synSnare.add(Synth.head(server,synthdefName,[
 					\out,busMain,\t_trig,1,\startPos,startPos,\busReverb,busReverb,\sendReverb,sendReverb,\busDelay,busDelay,\sendDelay,sendDelay,\pan,pan,\rate,rate,\lpf,lpf,
-					\amp1,amp*buf1Amp*mixSnare[i]*ampSnare,\buf1,buffer1,\amp2,amp*buf2Amp*mixSnare[i]*ampSnare,\buf2,buffer2,\retrig,retrig
+					\amp1,amp*buf1Amp*mixSnare[i]*ampSnare,\buf1,buffer1,\amp2,amp*buf2Amp*mixSnare[i]*ampSnare,\buf2,buffer2,\retrig,retrig,\retrig_rate,retrig_rate
 				]));
 			});
 		});

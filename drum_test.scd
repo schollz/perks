@@ -20,10 +20,14 @@ s.waitForBoot({
     ~snar_riddim="----x--x-x----x-";
     ~snar_riddim="----x--x----x--x";
     ~snar_riddim="----x--x----x--4";
-    ~snar_riddim="----x--x----22x2";
     ~snar_riddim="-x--x--x-x----x-";
+    ~snar_riddim="----x--x----2346";
     ~hiha_riddim="xox-xxx-xxx-xxxx";
     ~ride_riddim="x-x-x-x-x-x-x-x-";
+    ~hiha_riddim="-";
+    ~ride_riddim="-";
+    ~kick_riddim="-";
+    ~snar_riddim="4----2----3---5-";
     Routine{
         var bpm=180;
         var tpb=60/bpm/4;
@@ -52,16 +56,10 @@ s.waitForBoot({
             });
             if (snar.asInteger>0,{
                 // roll
-                Routine{
-                    snar.asInteger.do({ arg j;
-	    		var snarv2=snar_vel[(i+j).mod(snar_vel.size)]*30+60;
-                        l.playSnare(snarv2,1,0,rate,20000,0,0,0);
-                        (tpb/snar.asInteger).wait;
-                    })
-                }.play;
+                l.playSnare(snarv,1,0,rate,20000,0,0,0,snar.asInteger,snar.asInteger*4*bpm/60);
             },{
                 if (snar=="x",{
-                    l.playSnare(snarv,1,0,rate,20000,0,0,0);
+                l.playSnare(snarv,1,0,rate,20000,0,0,0,0);
                 });
             });
             if (hiha.asInteger>0,{
@@ -79,7 +77,7 @@ s.waitForBoot({
         });
     }.play;
     Routine {
-	16.wait;
+	4.wait;
 	0.exit;
     }.play;
 });
