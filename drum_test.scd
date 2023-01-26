@@ -27,7 +27,7 @@ s.waitForBoot({
     ~hiha_riddim="-";
     ~ride_riddim="-";
     ~kick_riddim="-";
-    ~snar_riddim="4----2----3---5-";
+    ~snar_riddim="x-x-2-2-";
     Routine{
         var bpm=180;
         var tpb=60/bpm/4;
@@ -36,7 +36,7 @@ s.waitForBoot({
 	var ride_vel=[1,1,0,1,1,0,1,1];
 	var hiha_vel=[1,0,1,0,1,0,1,0,1,1,0,1,1,0,1,0];
 	var slop=20; // +/- milliseconds
-	1.wait;
+	0.1.wait;
         inf.do({  arg i;
             var rate=1;
             var beat=i.mod(16);
@@ -56,10 +56,10 @@ s.waitForBoot({
             });
             if (snar.asInteger>0,{
                 // roll
-                l.playSnare(snarv,1,0,rate,20000,0,0,0,snar.asInteger,snar.asInteger*4*bpm/60);
+                l.playSnare(snarv,1,0,rate,20000,0,0,0,snar.asInteger,snar.asInteger*4*bpm/60*2);
             },{
                 if (snar=="x",{
-                l.playSnare(snarv,1,0,rate,20000,0,0,0,0);
+                l.playSnare(snarv,1,0,rate,20000,0,0,0,0,0);
                 });
             });
             if (hiha.asInteger>0,{
@@ -77,7 +77,7 @@ s.waitForBoot({
         });
     }.play;
     Routine {
-	4.wait;
+	3.wait;
 	0.exit;
     }.play;
 });
